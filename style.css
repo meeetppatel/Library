@@ -12,6 +12,7 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+
 .nav {
     width: 100%;
     text-align: center;
@@ -32,7 +33,7 @@ body {
     text-align: center;
 }
 
-.add-book-btn {
+#add-book-btn {
     height: 50px;
     width: 200px;
     border: none;
@@ -42,7 +43,7 @@ body {
     cursor: pointer;
 }
 
-.add-book-btn:hover {
+#add-book-btn:hover {
     background-color: rgb(0, 0, 0);
     color: rgb(255, 255, 255);
 }
@@ -83,7 +84,9 @@ body {
     font-size:30px;
     cursor: pointer;
 }
-
+.close:hover{
+    color: rgba(194, 11, 11, 0.897);
+}
 
 .input,
 .submit-btn {
@@ -99,3 +102,5 @@ body {
     background-color: lightgreen;
     font-size:18px;
 }
+
+/* books grid container */
