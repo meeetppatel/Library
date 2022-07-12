@@ -1,4 +1,5 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,7 +8,31 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
 </head>
+
 <body>
-    
+    <header class="nav">
+        <h1>Library</h1>
+    </header>
+    <div class="main-container">
+        <div class="add-btn">
+            <button class="add-book-btn">+ Add Book</button>
+        </div>
+        <div class="books-grid" id="booksgrid">
+        </div>
+    </div>
+    <div class="form-container" id="addbookcontainer">
+        <form class="add-book-form">
+            <h3>Add New Book</h3>
+            <input class="input" type="text" id="title" placeholder="Title" required maxlength="100" />
+            <input class="input" type="text" id="author" placeholder="Author" required maxlength="100" />
+            <input class="input" type="number" id="pages" placeholder="Pages" required max="10000" />
+            <div class="is-read">
+                <label for="is-read">Have you read it?</label>
+                <input class="checkbox" type="checkbox" id="isRead" />
+              </div>
+              <button class="btn submit-btn" type="submit">Submit</button>
+        </form>
+    </div>
 </body>
+
 </html>
