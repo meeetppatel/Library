@@ -8,6 +8,11 @@ function Book(title, author, pages, isRead) {
 }
 
 
+window.addEventListener('DOMContentLoaded', () => {
+  getlocal();
+});
+
+
 
 const formcontainer = document.getElementById("addbookcontainer");
 const closebtn = document.getElementById("close-btn");
@@ -93,7 +98,7 @@ function addbooks() {
     });
 
     removebook.classList.add("removebtn");
-    removebook.innerHTML = "Remove";
+    removebook.innerHTML = "remove";
     removebook.addEventListener("click", removebooks);
 
     
@@ -140,6 +145,3 @@ function getlocal(){
   }
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-  getlocal();
-});
