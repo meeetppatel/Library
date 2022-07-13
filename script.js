@@ -7,6 +7,8 @@ function Book(title, author, pages, isRead) {
   this.isRead = isRead;
 }
 
+
+
 const formcontainer = document.getElementById("addbookcontainer");
 const closebtn = document.getElementById("close-btn");
 const addbookbtn = document.getElementById("add-book-btn");
@@ -17,15 +19,15 @@ const booksgrid = document.getElementById("booksgrid");
 formcontainer.style.display = "none";
 
 addbookbtn.addEventListener("click", () => {
-  document.getElementById("title").value = "";
-  document.getElementById("author").value = "";
-  document.getElementById("pages").value = "";
   formcontainer.style.display = "block";
+  form.reset();
 });
+
 
 closebtn.addEventListener("click", () => {
   formcontainer.style.display = "none";
 });
+
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -37,12 +39,16 @@ form.addEventListener("submit", (e) => {
   addbooktolibrary(btitle, bauthor, pagescount, checkbox);
 });
 
+
 function addbooktolibrary(title, author, pages, isRead) {
   const book = new Book(title, author, pages, isRead);
   library.push(book);
   formcontainer.style.display = "none";
+  saveLocal();
+  getlocal();
   addbooks();
 }
+
 
 function addbooks() {
   let bookid = 0;
@@ -61,13 +67,13 @@ function addbooks() {
 
     bookdiv.classList.add("book");
     booktitle.classList.add("book-title");
-    booktitle.innerHTML = "Book: " + book.title;
+    booktitle.innerHTML = "Book : " + book.title;
 
     bookauthor.classList.add("book-author");
-    bookauthor.innerHTML = "Author: " + book.author;
+    bookauthor.innerHTML = "Author : " + book.author;
 
     bookpages.classList.add("pages");
-    bookpages.innerHTML = "pages" + book.pages;
+    bookpages.innerHTML = "pages : " + book.pages;
 
     isreadbtn.classList.add("readbtn");
     if (book.isRead === true) {
@@ -105,13 +111,35 @@ function addbooks() {
     isreadbtn.dataset.bookID = bookid;
 
     console.log(bookid);
-    bookid++;
-
+    
     function removebooks() {
       library.splice(removebook.dataset.bookID, 1);
       addbooks();
+      saveLocal();
     }
-
     
+    bookid++;
+    saveLocal();
   });
 }
+
+
+
+const saveLocal = () => {
+  localStorage.setItem('books', JSON.stringify(library))
+}
+
+function getlocal(){
+  if(localStorage.getItem('books')){
+    let items = JSON.parse(localStorage.getItem("books"));
+    library = items;
+    addbooks();
+    console.log("exist");
+  }else{
+    console.log("doesn't exist");
+  }
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  getlocal();
+});
