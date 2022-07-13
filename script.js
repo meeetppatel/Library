@@ -11,6 +11,7 @@ const formcontainer = document.getElementById("addbookcontainer");
 const closebtn = document.getElementById("close-btn");
 const addbookbtn = document.getElementById("add-book-btn");
 const submitbookbtn = document.getElementById("submitbtn");
+const form = document.getElementById("form")
 
 formcontainer.style.display = "none";
 
@@ -24,7 +25,8 @@ addbookbtn.addEventListener("click", () => {
 closebtn.addEventListener("click", () => {
   formcontainer.style.display = "none";
 });
-submitbookbtn.addEventListener("click", (e) => {
+
+form.addEventListener("submit", (e) => {
   e.preventDefault();
   const titleEle = document.getElementById("title").value;
   const authorEle = document.getElementById("author").value;
