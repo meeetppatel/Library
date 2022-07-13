@@ -11,11 +11,10 @@ const formcontainer = document.getElementById("addbookcontainer");
 const closebtn = document.getElementById("close-btn");
 const addbookbtn = document.getElementById("add-book-btn");
 const submitbookbtn = document.getElementById("submitbtn");
-const form = document.getElementById("form")
+const form = document.getElementById("form");
 const booksgrid = document.getElementById("booksgrid");
 
 formcontainer.style.display = "none";
-
 
 addbookbtn.addEventListener("click", () => {
   document.getElementById("title").value = "";
@@ -28,8 +27,6 @@ closebtn.addEventListener("click", () => {
   formcontainer.style.display = "none";
 });
 
-
-
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   const btitle = document.getElementById("title").value;
@@ -40,9 +37,6 @@ form.addEventListener("submit", (e) => {
   addbooktolibrary(btitle, bauthor, pagescount, checkbox);
 });
 
-
-
-
 function addbooktolibrary(title, author, pages, isRead) {
   const book = new Book(title, author, pages, isRead);
   library.push(book);
@@ -50,8 +44,13 @@ function addbooktolibrary(title, author, pages, isRead) {
   addbooks();
 }
 
-
 function addbooks() {
+  let bookid = 0;
+  let allbooks = document.querySelectorAll(".book");
+  allbooks.forEach((Book) => {
+    Book.remove();
+  });
+
   library.forEach((book) => {
     const bookdiv = document.createElement("div");
     const booktitle = document.createElement("div");
@@ -89,18 +88,30 @@ function addbooks() {
 
     removebook.classList.add("removebtn");
     removebook.innerHTML = "Remove";
-    removebook.addEventListener("click", removebook);
+    removebook.addEventListener("click", removebooks);
 
+    
     bookdiv.appendChild(booktitle);
     bookdiv.appendChild(bookauthor);
     bookdiv.appendChild(bookpages);
     bookdiv.appendChild(isreadbtn);
     bookdiv.appendChild(removebook);
-
+    
     booksgrid.appendChild(bookdiv);
-  });
-}
+    
+    // remove books fn
+    bookdiv.dataset.bookID = bookid;
+    removebook.dataset.bookID = bookid;
+    isreadbtn.dataset.bookID = bookid;
 
-function removebook() {
-  pass;
+    console.log(bookid);
+    bookid++;
+
+    function removebooks() {
+      library.splice(removebook.dataset.bookID, 1);
+      addbooks();
+    }
+
+    
+  });
 }
