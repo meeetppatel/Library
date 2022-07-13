@@ -10,6 +10,7 @@ function Book(title, author, pages, isRead) {
 const formcontainer = document.getElementById("addbookcontainer");
 const closebtn = document.getElementById("close-btn");
 const addbookbtn = document.getElementById("add-book-btn");
+const booksgrid = document.getElementById("booksgrid");
 
 formcontainer.style.display = "none";
 
@@ -26,3 +27,4 @@ addbookbtn.addEventListener("click", () => {
 closebtn.addEventListener("click", () => {
     formcontainer.style.display = "none";
 })
+
