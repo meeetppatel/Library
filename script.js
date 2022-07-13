@@ -7,12 +7,9 @@ function Book(title, author, pages, isRead) {
   this.isRead = isRead;
 }
 
-
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener("DOMContentLoaded", () => {
   getlocal();
 });
-
-
 
 const formcontainer = document.getElementById("addbookcontainer");
 const closebtn = document.getElementById("close-btn");
@@ -28,11 +25,9 @@ addbookbtn.addEventListener("click", () => {
   form.reset();
 });
 
-
 closebtn.addEventListener("click", () => {
   formcontainer.style.display = "none";
 });
-
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -44,7 +39,6 @@ form.addEventListener("submit", (e) => {
   addbooktolibrary(btitle, bauthor, pagescount, checkbox);
 });
 
-
 function addbooktolibrary(title, author, pages, isRead) {
   const book = new Book(title, author, pages, isRead);
   library.push(book);
@@ -54,6 +48,13 @@ function addbooktolibrary(title, author, pages, isRead) {
   addbooks();
 }
 
+// function readbtncolor() {
+//   if (book.isRead === true) {
+//     isreadbtn.style.backgroundColor = "red";
+//   } else {
+//     isreadbtn.style.backgroundColor = "green";
+//   }
+// }
 
 function addbooks() {
   let bookid = 0;
@@ -95,53 +96,59 @@ function addbooks() {
         book.isRead = false;
         isreadbtn.innerHTML = "not read";
       }
+      readbtncolor(book.isRead,isreadbtn);
     });
+    readbtncolor(book.isRead,isreadbtn);
 
     removebook.classList.add("removebtn");
     removebook.innerHTML = "remove";
     removebook.addEventListener("click", removebooks);
 
-    
     bookdiv.appendChild(booktitle);
     bookdiv.appendChild(bookauthor);
     bookdiv.appendChild(bookpages);
     bookdiv.appendChild(isreadbtn);
     bookdiv.appendChild(removebook);
-    
+
     booksgrid.appendChild(bookdiv);
-    
+
     // remove books fn
     bookdiv.dataset.bookID = bookid;
     removebook.dataset.bookID = bookid;
     isreadbtn.dataset.bookID = bookid;
 
     console.log(bookid);
-    
+
     function removebooks() {
       library.splice(removebook.dataset.bookID, 1);
       addbooks();
       saveLocal();
     }
-    
+
     bookid++;
     saveLocal();
+    readbtncolor();
+
+    
   });
 }
 
-
-
-const saveLocal = () => {
-  localStorage.setItem('books', JSON.stringify(library))
+function readbtncolor(read, btn) {
+  if(read)btn.style.backgroundColor ="rgb(149, 247, 149)";
+  else btn.style.backgroundColor="rgb(247, 149, 149)";
 }
 
-function getlocal(){
-  if(localStorage.getItem('books')){
+const saveLocal = () => {
+  localStorage.setItem("books", JSON.stringify(library));
+};
+
+function getlocal() {
+  if (localStorage.getItem("books")) {
     let items = JSON.parse(localStorage.getItem("books"));
     library = items;
     addbooks();
     console.log("exist");
-  }else{
+  } else {
     console.log("doesn't exist");
   }
 }
-
