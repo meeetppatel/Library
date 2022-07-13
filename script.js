@@ -12,8 +12,10 @@ const closebtn = document.getElementById("close-btn");
 const addbookbtn = document.getElementById("add-book-btn");
 const submitbookbtn = document.getElementById("submitbtn");
 const form = document.getElementById("form")
+const booksgrid = document.getElementById("booksgrid");
 
 formcontainer.style.display = "none";
+
 
 addbookbtn.addEventListener("click", () => {
   document.getElementById("title").value = "";
@@ -26,21 +28,20 @@ closebtn.addEventListener("click", () => {
   formcontainer.style.display = "none";
 });
 
+
+
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  const titleEle = document.getElementById("title").value;
-  const authorEle = document.getElementById("author").value;
-  const pagesEle = document.getElementById("pages").value;
-  const checkboxEle = document.getElementById("isRead").value;
-  console.log(titleEle, authorEle, pagesEle, checkboxEle);
-
-  addbooktolibrary(
-    `${titleEle}`,
-    `${authorEle}`,
-    `${pagesEle}`,
-    checkboxEle.checked
-  );
+  const btitle = document.getElementById("title").value;
+  const bauthor = document.getElementById("author").value;
+  const pagescount = document.getElementById("pages").value;
+  const checkbox = document.getElementById("isRead").checked;
+  console.log(btitle, bauthor, pagescount, checkbox);
+  addbooktolibrary(btitle, bauthor, pagescount, checkbox);
 });
+
+
+
 
 function addbooktolibrary(title, author, pages, isRead) {
   const book = new Book(title, author, pages, isRead);
@@ -48,7 +49,7 @@ function addbooktolibrary(title, author, pages, isRead) {
   formcontainer.style.display = "none";
   addbooks();
 }
-const booksgrid = document.getElementById("booksgrid");
+
 
 function addbooks() {
   library.forEach((book) => {
